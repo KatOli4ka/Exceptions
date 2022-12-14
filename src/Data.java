@@ -1,4 +1,4 @@
-public class Data extends WrongLoginException{
+public class Data{
     public static final String VALID_SYMBOLS = "abcdefjhigklmnopqrstuvwxyzaABCDEFJHIGKLMNOPQRSTUVWXYZ_0123456789";
     private Data() {
 
@@ -18,7 +18,7 @@ public class Data extends WrongLoginException{
             return false;
         }
         for (int i = 0; i < s.length(); i++) {
-            if (VALID_SYMBOLS.contains(String.valueOf(s.charAt(i)))) {
+            if (!VALID_SYMBOLS.contains(String.valueOf(s.charAt(i)))) {
                 return false;
             }
         }
@@ -26,10 +26,10 @@ public class Data extends WrongLoginException{
     }
     private static void check(String login, String password, String confirmPassword)
         throws WrongPasswordException,WrongLoginException{
-        if (valid(login)) {
+        if (!valid(login)) {
             throw new WrongLoginException("Неверный логин!");
         }
-        if (valid(password)) {
+        if (!valid(password)) {
             throw new WrongPasswordException("Неверный пароль!");
         }
         if (!password.equals(confirmPassword)) {
